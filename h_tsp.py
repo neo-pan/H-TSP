@@ -842,7 +842,7 @@ class VecEnv:
 
     def to_device_(self, device: Optional[Union[torch.device, str]] = None):
         for env in self.envs:
-            env.to_device_(device) 
+            env.to_device_(device)
 
 
 def readDataFile(filePath):
