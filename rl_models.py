@@ -25,9 +25,11 @@ class IMPALACNN(nn.ModuleDict):
         This corresponds to the number of unit for the last layer.
     """
 
-    def __init__(
-        self, input_channels, output_dim, depths=[16, 32, 32], input_shape=[100, 100]
-    ):
+    def __init__(self, input_channels, output_dim, depths=None, input_shape=None):
+        if depths is None:
+            depths = [16, 32, 32]
+        if input_shape is None:
+            input_shape = [100, 100]
         super().__init__()
         self.input_channels = input_channels
         input_shape = torch.as_tensor(input_shape)
@@ -145,10 +147,16 @@ class IMPALAEncoder(nn.ModuleDict):
         self,
         input_dim,
         embedding_dim,
-        bev_range=[0.0, 0.0, 1.0, 1.0],
-        bev_pixel_size=[0.01, 0.01],
-        depths=[16, 32, 32],
+        bev_range=None,
+        bev_pixel_size=None,
+        depths=None,
     ):
+        if bev_range is None:
+            bev_range = [0.0, 0.0, 1.0, 1.0]
+        if bev_pixel_size is None:
+            bev_pixel_size = [0.01, 0.01]
+        if depths is None:
+            depths = [16, 32, 32]
         # We assume CxHxW images (channels first)
         # Re-ordering will be done by pre-preprocessing or wrapper
         super().__init__()
