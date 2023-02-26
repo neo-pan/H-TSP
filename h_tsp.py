@@ -108,7 +108,7 @@ class FarthestInsertSolver(LowLevelSolver):
         positions = fragment_pos
         tour = np.array([0, frag_len-1])
 
-        nodes_arr = np.ma.masked_array([i for i in available_nodes])
+        nodes_arr = np.ma.masked_array(list(available_nodes))
         best_distances = np.ma.masked_array(cdist(positions[nodes_arr], positions[tour], 'euclidean').min(axis=1))
 
         # We want the most distant node, so we get the max
